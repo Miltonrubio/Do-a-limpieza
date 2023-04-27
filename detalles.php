@@ -11,6 +11,7 @@ $sql = "SELECT *  from personal where id=$id";
 $query = mysqli_query($con, $sql);
 
 
+session_start();
 
 ?>
 
@@ -165,13 +166,15 @@ $baseUrl = 'http://localhost/donalimpieza';
     <input type="hidden" name="item_number" value="1">
     <!-- <input type="hidden" name="invoice" value="0012"> -->
 
-    <input type="hidden" name="lc" value="es_ES">
-    <input type="hidden" name="no_shipping" value="1">
-    <input type="hidden" name="image_url" value="https://picsum.photos/150/150">
-    <input type="hidden" name="return" value="<?= $baseUrl ?>/receptor.php">
-    <input type="hidden" name="cancel_return" value="<?= $baseUrl ?>/pago_cancelado.php">
+    <input type="hidden" style="display:none" name="lc" value="es_ES">
+    <input type="hidden" style="display:none" name="no_shipping" value="1">
+    <input type="hidden" style="display:none" name="image_url" value="https://picsum.photos/150/150">
+    <input type="hidden" style="display:none" name="return" value="<?= $baseUrl ?>/receptor.php">
+    <input type="hidden" style="display:none" name="cancel_return" value="<?= $baseUrl ?>/pago_cancelado.php">
 
-
+    
+    <input type="email" name="miCampo" class="form-control" placeholder="Ingresa tu correo para la confirmacion" required>
+    <br><br>
               <button class="button btn btn-primary" type="submit">Pagar ahora con Paypal</button>
 
 </form>
@@ -185,6 +188,9 @@ $baseUrl = 'http://localhost/donalimpieza';
 
           <?php
             }
+
+            $correousuario = $_POST['miCampo'];
+            $_SESSION['usuario'] = $correousuario;
                 ?>
 
 
