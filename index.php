@@ -1,3 +1,17 @@
+<?php
+include("conexion.php");
+$con = conectar();
+
+
+$sql = "SELECT * from personal where rol='1'";
+$query = mysqli_query($con, $sql);
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +28,9 @@
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -42,7 +58,7 @@
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="index.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span>Doña Limpieza</span>
       </a>
@@ -50,13 +66,11 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
+          <li><a class="nav-link scrollto" href="#team">Equipo</a></li>
           <li><a class="nav-link scrollto" href="#about">Acerca De</a></li>
-          <li><a class="nav-link scrollto" href="#services">Servicios</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li><a class="nav-link scrollto" href="#services">Testimoniales</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contacto</a></li>
+          <li><a class="getstarted scrollto" href="login.php">Iniciar sesión</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -74,7 +88,8 @@
           <h2 data-aos="fade-up" data-aos-delay="400">¿Empezamos a limpiar?</h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
-              <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+              <a href="#team"
+                class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                 <span>Comienza Ahora</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
@@ -82,7 +97,7 @@
           </div>
         </div>
         <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-        
+
         </div>
       </div>
     </div>
@@ -90,6 +105,58 @@
   </section><!-- End Hero -->
 
   <main id="main">
+
+
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <p>Nuestro Equipo</p>
+        </header>
+
+        <div class="row gy-4">
+
+          <?php
+          while ($row = mysqli_fetch_array($query)) {
+            ?>
+
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+              <div class="member">
+                <div class="member-img">
+                  <img src="assets/img/usuarios/<?php echo $row['foto']?>" class="img-fluid" alt="" widht="100%" height="auto">
+                  <div class="social">
+                    <a target="_blank" href="https://www.facebook.com/chapita.rubio.9"><i class="bi bi-facebook"></i></a>
+                    <a target="_blank" href="https://www.instagram.com/chapitarubio/"><i class="bi bi-instagram"></i></a>
+                    <a target="_blank" href="wa.me/+522382115594"><i class="bi bi-whatsapp"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <h4>
+                    <?php echo $row["nombre"], " ", $row["apellidos"] ?>
+                  </h4>
+                  <p>  Me esfuerzo todos los dias y siempre termino el trabajo a tiempo  </p>
+                  <a href="detalles.php?id=<?php echo $row["id"]?>" class="btn-read-more">Contratar</a>
+                </div>
+              </div>
+            </div>
+
+
+            <?php
+          }
+          ?>
+
+        </div>
+
+      </div>
+
+    </section><!-- End Team Section -->
+
+
+
+
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
 
@@ -100,13 +167,14 @@
             <div class="content">
               <h2>¿Como funciona?</h2>
               <p>
-         El servicio de limpieza será ofrecido por amas de casa.
-Se dará capacitación a las amas de casa, para que ofrezcan un servicio de calidad. 
-La confianza de los clientes será garantizado 
-En la página podrá encontrar paquetes de servicio de limpieza que se ajusten más a sus necesidades. 
-El costo del servicio le garantizara a los clientes la calidad del servicio.      </p>
+                El servicio de limpieza será ofrecido por amas de casa.
+                Se dará capacitación a las amas de casa, para que ofrezcan un servicio de calidad.
+                La confianza de los clientes será garantizado
+                En la página podrá encontrar paquetes de servicio de limpieza que se ajusten más a sus necesidades.
+                El costo del servicio le garantizara a los clientes la calidad del servicio. </p>
               <div class="text-center text-lg-start">
-                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                <a href="#"
+                  class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
                   <span>Leer más</span>
                   <i class="bi bi-arrow-right"></i>
                 </a>
@@ -129,7 +197,7 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-      
+
           <p>Como iniciar</p>
         </header>
 
@@ -175,7 +243,8 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
             <div class="count-box">
               <i class="bi bi-emoji-smile"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="23" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="23" data-purecounter-duration="1"
+                  class="purecounter"></span>
                 <p>Usuarios Nuevos Diarios</p>
               </div>
             </div>
@@ -185,7 +254,8 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
             <div class="count-box">
               <i class="bi bi-chat-left-dots-fill" style="color: #ee6c20;"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1"
+                  class="purecounter"></span>
                 <p>Comentarios Positivos</p>
               </div>
             </div>
@@ -195,7 +265,8 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
             <div class="count-box">
               <i class="bi bi-house" style="color: #15be56;"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="146" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="146" data-purecounter-duration="1"
+                  class="purecounter"></span>
                 <p>Casas Limpias</p>
               </div>
             </div>
@@ -205,7 +276,8 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
             <div class="count-box">
               <i class="bi bi-people" style="color: #bb0852;"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1"
+                  class="purecounter"></span>
                 <p>Miembros activos </p>
               </div>
             </div>
@@ -222,7 +294,7 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-      
+
           <p>Testimoniales</p>
         </header>
 
@@ -231,48 +303,26 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="service-box blue">
               <i class="ri-discuss-line icon"></i>
-              <h3>Walter White</h3>
-              <p>Me encanto trabajar con doña limpieza, mi casa quedo tan limpia que podria ver mi reflejo en el piso</p>
+              <h3>Milton Jair</h3>
+              <p>Me encanto trabajar con doña limpieza, mi casa quedo tan limpia que podria ver mi reflejo en el piso
+              </p>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="service-box orange">
               <i class="ri-discuss-line icon"></i>
-              <h3>Eosle Commodi</h3>
-              <p> Me encanto trabajar con doña limpieza, mi casa quedo tan limpia que podria ver mi reflejo en el piso</p>
+              <h3>Eduardo Reyes</h3>
+              <p> Quede fascinada con el servicio que ofrece Doña Limpieza. Mi casa quedo reluciente.</p>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
             <div class="service-box green">
               <i class="ri-discuss-line icon"></i>
-              <h3>Ledo Markt</h3>
-         <p>Me encanto trabajar con doña limpieza, mi casa quedo tan limpia que podria ver mi reflejo en el piso</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-box red">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Asperiores Commodi</h3>
-             <p>Me encanto trabajar con doña limpieza, mi casa quedo tan limpia que podria ver mi reflejo en el piso</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-box purple">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Velit Doloremque.</h3>
-           <p>Me encanto trabajar con doña limpieza, mi casa quedo tan limpia que podria ver mi reflejo en el piso</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
-            <div class="service-box pink">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Dolori Architecto</h3>
-       <p></p>
+              <h3>Adriana Garcia</h3>
+              <p>Excelente servicio de limpieza, el personal de Doña limpieza es confiable, altamente calificado y
+                eficiente. Me encanto el resultado. Recomendado 100%.</p>
             </div>
           </div>
 
@@ -298,147 +348,122 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
             <div class="accordion accordion-flush" id="faqlist1">
               <div class="accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                    Non consectetur a erat nam at lectus urna duis?
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq-content-1">
+                    ¿Qué puede hacer Doña Limpieza?
                   </button>
                 </h2>
                 <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                   <div class="accordion-body">
-                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                  </div>
+                    Doña Limpieza, realizará la limpieza general de toda tu casa. También podrás encontrar a personas
+                    que te apoyen con lavado de ropa, planchar y cocinar. </div>
                 </div>
               </div>
 
               <div class="accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                    Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
-                  </button>
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq-content-2">
+                    ¿Cada cuándo puedo reservar? </button>
                 </h2>
                 <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                   <div class="accordion-body">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                    Puedes reservar tu servicio de limpieza a partir de 3 horas, con la frecuencia que lo necesites.
+                    Desde un sólo servicio, una vez a la semana e incluso servicios urgentes.
                   </div>
                 </div>
               </div>
 
               <div class="accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq-content-3">
+                    ¿Qué puedes solicitar en nuestros servicios?
                   </button>
                 </h2>
                 <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                   <div class="accordion-body">
-                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                    Doña limpieza, realiza la limpieza general de tu casa. Las tareas de limpieza dependen de la
+                    cantidad de horas que reserves. Sólo aplica lavado a máquina. </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq-content-4">
+                    ¿Qué incluye el servicio de la cocina?
+                  </button>
+                </h2>
+                <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                  <div class="accordion-body">
+                    El servicio que estamos ofreciendo es el Lavado de platos, Limpieza de microondas, Limpieza de
+                    superficies, Barrido y fregado de pisos, Limpieza de electrodomésticos y Sacar la basura
                   </div>
                 </div>
               </div>
 
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq-content-5">
+                    ¿Qué incluye el servicio de áreas comunes?
+                  </button>
+                </h2>
+                <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                  <div class="accordion-body">
+                    Los servicios que estamos realizando para estas áreas es la Limpieza de polvo, Limpieza de
+                    superficies, Barrido de pisos, Fregado de pisos y Sacar la basura. </div>
+                </div>
+
+
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#faq-content-6">
+                      ¿Qué incluye el servicio de los baños?
+                    </button>
+                  </h2>
+                  <div id="faq-content-6" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                    <div class="accordion-body">
+                      La Limpieza de grifos, Limpieza de espejos, Recoger y doblar toallas, Barrido y fregado de
+                      pisos, Limpieza de wc y regadera y Sacar la basura.
+                    </div>
+                  </div>
+
+
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq-content-7">
+
+                        ¿Qué incluyen todas nuestras tarifas?
+                      </button>
+                    </h2>
+                    <div id="faq-content-7" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                      <div class="accordion-body">
+                        <ul>
+                          <li>Transportes para llegar a tu servicio.</li>
+                          <li>Equipo capacitado en limpieza.</li>
+                          <li>Garantía de satisfacción.</li>
+                          <li>Soporte durante y después de tu servicio.</li>
+                        </ul>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+              </div>
+
             </div>
-          </div>
-
-         
-
-        </div>
-
-      </div>
 
     </section><!-- End F.A.Q Section -->
-
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <p>Nuestro Equipo</p>
-        </header>
-
-        <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
-                <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.</p>
-                <a href="contratar.html" class="btn-read-more">Contratar</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
-                <p>Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima suscipit corporis. Voluptate sed quas reiciendis animi neque sapiente.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
-                <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
-                <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque ut possimus ipsum officia.</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- End Team Section -->
 
 
     <!-- ======= Contact Section ======= -->
@@ -481,7 +506,7 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
                 <div class="info-box">
                   <i class="bi bi-clock"></i>
                   <h3>Horario</h3>
-                  <p>Lunes a Viernes  <br>9:00AM - 05:00PM</p>
+                  <p>Lunes a Viernes <br>9:00AM - 05:00PM</p>
                 </div>
               </div>
             </div>
@@ -529,6 +554,7 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
 
   </main><!-- End #main -->
 
+
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="footer-top">
@@ -561,11 +587,10 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
           <div class="col-lg-2 col-6 footer-links">
             <h4>Nuestros servicios</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
+              <li><i class="bi bi-chevron-right"></i> Limpieza</li>
+              <li><i class="bi bi-chevron-right"></i> Trapeada</li>
+              <li><i class="bi bi-chevron-right"></i> Planchada</li>
+              <li><i class="bi bi-chevron-right"></i> Lavada</li>
             </ul>
           </div>
 
@@ -574,7 +599,7 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
             <p>
               12 sur 1202<br>
               Mexico, Puebla 75700<br>
-              
+
               <strong>Celular:</strong> +52 2382115594<br>
               <strong>Correo:</strong> doñalimpieza@gmail.com<br>
             </p>
@@ -588,11 +613,13 @@ El costo del servicio le garantizara a los clientes la calidad del servicio.    
     <div class="container">
       <div class="copyright">
         &copy; Copyright <strong><span>Doña Limpieza</span></strong> Todos los derechos reservados, 2023.
-       </div>
+      </div>
     </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>

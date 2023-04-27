@@ -1,10 +1,12 @@
 <?php
+
+
 function conectar(){
 
     $host="localhost";
-    $user="envelope_Milton";
-    $pass="=Envelope.220";
-    $bd="envelope_2023";
+    $user="root";
+    $pass="";
+    $bd="limpieza";
 
     $con=mysqli_connect($host,$user,$pass);
 
@@ -13,3 +15,4 @@ function conectar(){
     return $con;
 }
 ?>
+
