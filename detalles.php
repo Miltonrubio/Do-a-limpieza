@@ -5,14 +5,14 @@ include("conexion.php");
 $con = conectar();
 
 
-$sql = "SELECT *  from personal where id=1";
+$id = $_GET['id'];
+
+$sql = "SELECT *  from personal where id=$id";
 $query = mysqli_query($con, $sql);
 
+
+
 ?>
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +21,7 @@ $query = mysqli_query($con, $sql);
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Portfolio Details - FlexStart Bootstrap Template</title>
+  <title>Detalles</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -55,6 +55,32 @@ $query = mysqli_query($con, $sql);
 </head>
 
 <body>
+
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.php" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+        <span>Doña Limpieza</span>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
+          <li><a class="nav-link scrollto" href="#team">Equipo</a></li>
+          <li><a class="nav-link scrollto" href="#about">Acerca De</a></li>
+          <li><a class="nav-link scrollto" href="#services">Testimoniales</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contacto</a></li>
+          <li><a class="getstarted scrollto" href="login.php">Iniciar sesión</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
   <main id="main">
 
   <i class="bi bi-list mobile-nav-toggle"></i>
@@ -107,13 +133,48 @@ $query = mysqli_query($con, $sql);
               <h3>Informacion Personal</h3>
              
 
-              <img src="assets/img/usuarios/a.jpg" widht="100%" height="auto"> 
-
+              <img src="assets/img/usuarios/<?php echo $row["foto"]?>" widht="300px" height="300px"> 
+              <br><br>
               <ul>
-                <li><strong>Nombre</strong>: <?php echo $row["nombre"], $row["apellidos"] ?></li>
+                <li><strong>Nombre</strong>: <?php echo $row["nombre"]," ", $row["apellidos"] ?></li>
                 <li><strong>Calificación: </strong ><i style="color:yellow" class="bi bi-star-fill"></i><i style="color:yellow" class="bi bi-star-fill"></i><i  style="color:yellow"class="bi bi-star-fill"></i><i style="color:yellow" class="bi bi-star-fill"></i><i style="color:yellow" class="bi bi-star-half"></i></li>
+                <li><strong>Costo de servicios: </strong> 250 $</li>
                 <li><strong>Ubicación: </strong> Tehuacán, Puebla</li>
+                
+
               </ul>
+       
+       <?php
+$baseUrl = 'http://localhost/donalimpieza';
+?>
+
+
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="form_pay">
+
+  <input type="hidden" name="business" value="vendedor@business.example.com">
+    <input type="hidden" name="cmd" value="_xclick">
+    <input type="hidden" name="item_name" id="" value="Servicio de limpieza de <?php echo $row['nombre'],' ', $row['apellidos']?>"><br>
+    <input type="hidden" name="amount" id="" value="250" ><br>
+    <input type="hidden" name="currency_code" value="MXN">
+    <input type="hidden" name="quantity" id="" value="1" ><br>
+
+    <!-- Valores opcionales -->
+    <!-- En el siguiente enlace puedes encontrar una lista completa de Variables HTML para pagos estándar de PayPal. -->
+    <!-- https://developer.paypal.com/docs/paypal-payments-standard/integration-guide/Appx-websitestandard-htmlvariables/ -->
+
+    <input type="hidden" name="item_number" value="1">
+    <!-- <input type="hidden" name="invoice" value="0012"> -->
+
+    <input type="hidden" name="lc" value="es_ES">
+    <input type="hidden" name="no_shipping" value="1">
+    <input type="hidden" name="image_url" value="https://picsum.photos/150/150">
+    <input type="hidden" name="return" value="<?= $baseUrl ?>/receptor.php">
+    <input type="hidden" name="cancel_return" value="<?= $baseUrl ?>/pago_cancelado.php">
+
+
+              <button class="button btn btn-primary" type="submit">Pagar ahora con Paypal</button>
+
+</form>
             </div>
             <div class="portfolio-description">
               <h2>Sobre mi:</h2>
