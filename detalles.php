@@ -1,3 +1,19 @@
+
+
+<?php 
+include("conexion.php");
+$con = conectar();
+
+
+$sql = "SELECT *  from personal where id=1";
+$query = mysqli_query($con, $sql);
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +43,8 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <!-- =======================================================
   * Template Name: FlexStart
   * Updated: Mar 10 2023 with Bootstrap v5.2.3
@@ -37,19 +55,18 @@
 </head>
 
 <body>
-
   <main id="main">
 
-    <i class="bi bi-list mobile-nav-toggle"></i>
+  <i class="bi bi-list mobile-nav-toggle"></i>
     <!-- ======= Breadcrumbs ======= -->
     <section class="breadcrumbs">
       <div class="container">
 
         <ol>
           <li><a href="index.html">Home</a></li>
-          <li>Portfolio Details</li>
+          <li>Datos personales</li>
         </ol>
-        <h2>Portfolio Details</h2>
+        <h2>Doña limpieza</h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
@@ -81,23 +98,34 @@
             </div>
           </div>
 
+
+          <?php
+            while ($row = mysqli_fetch_array($query)) {
+                ?>
           <div class="col-lg-4">
             <div class="portfolio-info">
-              <h3>Project information</h3>
+              <h3>Informacion Personal</h3>
+             
+
+              <img src="assets/img/usuarios/a.jpg" widht="100%" height="auto"> 
+
               <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                <li><strong>Nombre</strong>: <?php echo $row["nombre"], $row["apellidos"] ?></li>
+                <li><strong>Calificación: </strong ><i style="color:yellow" class="bi bi-star-fill"></i><i style="color:yellow" class="bi bi-star-fill"></i><i  style="color:yellow"class="bi bi-star-fill"></i><i style="color:yellow" class="bi bi-star-fill"></i><i style="color:yellow" class="bi bi-star-half"></i></li>
+                <li><strong>Ubicación: </strong> Tehuacán, Puebla</li>
               </ul>
             </div>
             <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
+              <h2>Sobre mi:</h2>
               <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
+                Me esfuerzo todos los dias y siempre termino el trabajo a tiempo   </p>
             </div>
           </div>
+
+          <?php
+            }
+                ?>
+
 
         </div>
 
@@ -108,70 +136,51 @@
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-
-    <div class="footer-newsletter">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-12 text-center">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-          </div>
-          <div class="col-lg-6">
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="footer-top">
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-5 col-md-12 footer-info">
             <a href="index.html" class="logo d-flex align-items-center">
               <img src="assets/img/logo.png" alt="">
-              <span>FlexStart</span>
+              <span>Doña Limpieza</span>
             </a>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+            <p>Consolidarnos como una empresa líder en contratación de amas de casa de manera virtual.</p>
             <div class="social-links mt-3">
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="twitter"><i class="bi bi-tiktok"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
               <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
 
           <div class="col-lg-2 col-6 footer-links">
-            <h4>Useful Links</h4>
+            <h4>Nuestros enlaces</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Inicio</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Sobre nosotros</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Servicios</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Terminos y servicios</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Acuerdos de privacidad</a></li>
             </ul>
           </div>
 
           <div class="col-lg-2 col-6 footer-links">
-            <h4>Our Services</h4>
+            <h4>Nuestros servicios</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
+              <li><i class="bi bi-chevron-right"></i> Limpieza</li>
+              <li><i class="bi bi-chevron-right"></i> Trapeada</li>
+              <li><i class="bi bi-chevron-right"></i> Planchada</li>
+              <li><i class="bi bi-chevron-right"></i> Lavada</li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-            <h4>Contact Us</h4>
+            <h4>Contactanos</h4>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              12 sur 1202<br>
+              Mexico, Puebla 75700<br>
+              
+              <strong>Celular:</strong> +52 2382115594<br>
+              <strong>Correo:</strong> doñalimpieza@gmail.com<br>
             </p>
 
           </div>
@@ -182,17 +191,11 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>FlexStart</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
+        &copy; Copyright <strong><span>Doña Limpieza</span></strong> Todos los derechos reservados, 2023.
+       </div>
     </div>
   </footer><!-- End Footer -->
+
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

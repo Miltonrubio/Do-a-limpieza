@@ -8,7 +8,7 @@ error_reporting(E_ERROR | E_PARSE);
 
 //Linea de conexion a la bd
 
-$mysqli=new mysqli("localhost","root","","alba2");
+$mysqli=new mysqli("localhost","root","","limpieza");
 if ($mysqli->connect_errno) {
   //Si hay un error, se muestr un mensaje con el error
   echo "Error al conectarse con My SQL debido al error".$mysqli->connect_error;
@@ -22,7 +22,7 @@ $usu=$_POST['usuario'];
 //pide el password
 $pass=$_POST['clave'];
 //indica el rol del correo y la clave tales como instalador, administrador etc.
-$usuarios=$mysqli->query("SELECT * FROM usuarios Where username='".$usu."' AND password='".$pass."'");
+$usuarios=$mysqli->query("SELECT * FROM usuarios Where correo='".$usu."' AND password='".$pass."'");
 if ($usuarios->num_rows==1):
   /*valida que si hay un usuario que coincidan sus datos, ejecute la consulta 
   y guarde los resultados en la variable datos*/
